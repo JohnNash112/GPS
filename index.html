@@ -18,7 +18,7 @@
         var stop_value = 0;
         const getGPS= function(){
             if (!stop_value) {
-            navigator.geolocation.getCurrentPosition(
+            navigator.geolocation.watchPosition(
             data=>{
                 console.log(data);
                 var d = new Date(0);
@@ -31,7 +31,6 @@
                 // timeout: 1000,
                 enableHighAccuracy: true
             });
-            setTimeout(getGPS, 1000);
         }};
         const stopGPS = function(){
             stop_value = 1;
