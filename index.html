@@ -22,7 +22,7 @@
             data=>{
                 console.log(data);
                 var d = new Date(0);
-                d.setUTCSeconds(data.timestamp);
+                d.setUTCSeconds(Math.floor(data.timestamp/1000));
                 coordlist.push([d,data.coords.latitude, data.coords.longitude]);
                 window.localStorage.setItem("coordinates", JSON.stringify(coordlist))
             }, 
