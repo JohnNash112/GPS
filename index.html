@@ -1,61 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>GPS Tracker</title>
 </head>
-<body>
-    <button id="start">Start Tracking</button>
-    <button id="end">End Tracking</button><br>
-    <button id="action">Download csv</button>
-    
-    <script>
-        const start = document.querySelector("#start");
-        const end = document.querySelector("#end");
-        const coordlist = [];
-        var stop_value = 0;
-        const getGPS= function(){
-            if (!stop_value) {
-            navigator.geolocation.watchPosition(
-            data=>{
-                console.log(data);
-                var d = new Date(0);
-                d.setUTCSeconds(Math.floor(data.timestamp/1000));
-                coordlist.push([d,data.coords.latitude, data.coords.longitude,  data.coords.speed]);
-                window.localStorage.setItem("coordinates", JSON.stringify(coordlist))
-            }, 
-            error =>console.log(error),
-            {
-                // timeout: 1000,
-                enableHighAccuracy: true
-            });
-        }};
-        const stopGPS = function(){
-            stop_value = 1;
-        }
-        start.addEventListener("click", getGPS);
-        end.addEventListener("click",stopGPS);
-        const download = function (data) {
-
-                const blob = new Blob([data], { type: 'text/csv' });
-                const url = window.URL.createObjectURL(blob)
-                const a = document.createElement('a')
-                a.setAttribute('href', url)
-
-                a.setAttribute('download', 'download.csv');
-                a.click()
-            }
-        const get = async function () {
-            var csv_data = coordlist.map(function (d) {
-                return d.join();
-            }).join('\n');
-            download(csv_data);
-            }
-
-        const btn = document.getElementById('action');
-        btn.addEventListener('click', get);
-    </script>
+<button id="start">Start Tracking</button>
+<button id="end">End Tracking</button><br>
+<button id="action">Download csv</button>
+<button id="send">Send Data</button>
+<button id="score">Get Score</button>
+<script src="app.js"></script>
 </body>
+
 </html>
