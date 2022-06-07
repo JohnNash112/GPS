@@ -82,18 +82,8 @@ const get = async function () {
     download(csv_data);
 }
 
-const score_data = async function (){
-    console.log("Clicked.....")
-    axios.get('http://localhost:8000/score')
-                .then(res => console.log(res))
-
-}
-
 const btn = document.getElementById('action');
 btn.addEventListener('click', get);
 
 const send_btn = document.getElementById('send');
 send_btn.addEventListener('click', send_data);
-
-const score_btn = document.getElementById('score');
-score_btn.addEventListener('click', score_data);
