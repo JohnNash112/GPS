@@ -17,8 +17,8 @@ const send_data = async function() {
   // const myJSON = JSON.stringify(json_type);
   console.log(json_type)
   axios.post('https://dbanalysis.herokuapp.com/getClass', json_type)
-                .then(res => console.log(res))
-  document.write(response.data)
+                .then(res => document.write(res.data))
+  console.log(res)
   // json_type.forEach(tiny => {
   //  axios.post('http://localhost:8000/analyse', tiny)
   //               .then(res => console.log(res))
