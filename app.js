@@ -16,25 +16,21 @@ const send_data = async function() {
   });
   // const myJSON = JSON.stringify(json_type);
   console.log(json_type)
-  axios.post('https://dbanalysis.herokuapp.com/getClass', json_type)
-                .then(res => document.write(res.data))
-  console.log(res)
-  // json_type.forEach(tiny => {
-  //  axios.post('http://localhost:8000/analyse', tiny)
-  //               .then(res => console.log(res))
-  // });
+  await axios.post('https://dbanalysis.herokuapp.com/getClass', json_type)
+                .then(res => console.log(res.data))
+ connsole.log(res)
+}
 
-  
-        }
 
-const start = document.querySelector("#start");
-const end = document.querySelector("#end");
+const stopGPS = function () {
+    stop_value = 1;
+}
 
 
 const getGPS = function () {
 
       setInterval(() => {
-        if (!stop_value) {
+        if (stop_value == 0) {
             navigator.geolocation.watchPosition(
                 data => {
                     console.log(data);
@@ -56,11 +52,7 @@ const getGPS = function () {
       }, 1000);  
         
 };
-const stopGPS = function () {
-    stop_value = 1;
-}
-start.addEventListener("click", getGPS);
-end.addEventListener("click", stopGPS);
+
 
 const download = function (data) {
 
@@ -82,7 +74,13 @@ const get = async function () {
     download(csv_data);
 }
 
-const btn = document.getElementById('action');
+
+const start = document.getElementById("start");
+const end = document.getElementById("end");
+start.addEventListener("click", getGPS);
+end.addEventListener("click", stopGPS);
+
+const btn = document.getElementById('download_data');
 btn.addEventListener('click', get);
 
 const send_btn = document.getElementById('send');
